@@ -4,10 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -16,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.justin.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -49,9 +54,11 @@ fun LazyItemScope.addHeader(){
 
 @Composable
 fun ColumnScope.addLazyList(){
+
     LazyColumn(
         modifier = Modifier
             .background(Color.Gray)
+            .height(80.dp)
     ) {
        item { this.addHeader() }
         items(listOf(
@@ -68,6 +75,7 @@ fun ColumnScope.addLazyList(){
 @Composable
 fun createList() {
     Column(modifier = Modifier
+        .verticalScroll(rememberScrollState())
         .background(Color.Red)){
         this.addLazyList()
     }
